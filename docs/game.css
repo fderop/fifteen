@@ -35,6 +35,10 @@ main {
 }
 
 header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 12px;
   margin-bottom: 12px;
   font-size: 1.25rem;
   font-variant-numeric: tabular-nums;
@@ -42,6 +46,16 @@ header {
 
 time {
   color: #ffd700;
+}
+
+.move-counters {
+  display: flex;
+  gap: 12px;
+}
+
+.move-counters span {
+  color: #bdbdbd;
+  font-size: 0.875rem;
 }
 
 #board, .challenge {

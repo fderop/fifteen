@@ -10,8 +10,12 @@ const outerColors = [
 ];
 const board = document.querySelector("#board");
 const timer = document.querySelector("#timer");
+const outerCounter = document.querySelector("#outer-moves");
+const innerCounter = document.querySelector("#inner-moves");
 let outer;
 let challenge;
+let outerMoves;
+let innerMoves;
 let startedAt;
 let timerFrame;
 let previousPoint = null;
@@ -73,6 +77,8 @@ function render() {
     return element;
   });
   board.replaceChildren(...tiles);
+  outerCounter.value = outerMoves;
+  innerCounter.value = innerMoves;
 }
 
 function updateTimer(now) {
@@ -96,10 +102,12 @@ function slideInner(index) {
   const gap = cells.indexOf(0);
   if (!adjacent(index, gap, innerWidth)) return false;
   [cells[gap], cells[index]] = [cells[index], cells[gap]];
+  innerMoves++;
   if (isSolved(cells)) {
     const outerGap = outer.indexOf(0);
     const index = challenge.tileIndex;
     [outer[outerGap], outer[index]] = [outer[index], outer[outerGap]];
+    outerMoves++;
     challenge = null;
     if (isSolved(outer)) {
       cancelAnimationFrame(timerFrame);
@@ -114,6 +122,8 @@ function restart(gap) {
   cancelAnimationFrame(timerFrame);
   outer = scramble(outerWidth, gap);
   challenge = null;
+  outerMoves = 0;
+  innerMoves = 0;
   startedAt = null;
   timer.textContent = "0.000";
   render();
