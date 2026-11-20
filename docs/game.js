@@ -12,12 +12,14 @@ const board = document.querySelector("#board");
 const timer = document.querySelector("#timer");
 const outerCounter = document.querySelector("#outer-moves");
 const innerCounter = document.querySelector("#inner-moves");
+const copyStatus = document.querySelector("#copy-status");
 let outer;
 let challenge;
 let outerMoves;
 let innerMoves;
 let startedAt;
 let timerFrame;
+let copyStatusTimeout;
 let previousPoint = null;
 
 function isSolved(cells) {
@@ -222,6 +224,15 @@ board.addEventListener("keydown", event => {
   if (index < 0 || index >= cells.length) return;
   if (challenge) slideInner(index);
   else beginChallenge(index, 4);
+});
+
+document.querySelector("#copy-result").addEventListener("click", async () => {
+  const result = `15x8 · ${timer.textContent}s · ${outerMoves} 4×4 moves · ${innerMoves} 3×3 moves`;
+  await navigator.clipboard.writeText(result);
+  copyStatus.textContent = "Copied";
+  copyStatus.dataset.visible = "";
+  clearTimeout(copyStatusTimeout);
+  copyStatusTimeout = setTimeout(() => { delete copyStatus.dataset.visible; }, 950);
 });
 
 restart();

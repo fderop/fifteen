@@ -15,6 +15,12 @@
       <div class="move-counters">
         <output id="outer-moves" aria-label="4 by 4 moves">0</output>
         <output id="inner-moves" aria-label="Total 3 by 3 moves">0</output>
+        <div class="copy-result">
+          <button id="copy-result" type="button" aria-label="Copy result">
+            <span class="copy-icon" aria-hidden="true"></span>
+          </button>
+          <span id="copy-status" role="status"></span>
+        </div>
       </div>
     </header>
     <div id="board" role="group" aria-label="Sliding puzzle" tabindex="0"></div>
