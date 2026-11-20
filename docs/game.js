@@ -227,7 +227,7 @@ board.addEventListener("keydown", event => {
 });
 
 document.querySelector("#copy-result").addEventListener("click", async () => {
-  const result = `15x8 · ${timer.textContent}s · ${outerMoves} 4×4 moves · ${innerMoves} 3×3 moves`;
+  const result = `${timer.textContent}s · ${outerMoves} · ${innerMoves}`;
   await navigator.clipboard.writeText(result);
   copyStatus.textContent = "Copied";
   copyStatus.dataset.visible = "";
